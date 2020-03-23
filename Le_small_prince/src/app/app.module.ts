@@ -8,7 +8,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ModalController } from '@ionic/angular';
 import { ConnexionPageModule } from './connexion/connexion.module';
 
 
@@ -19,7 +18,7 @@ import { ConnexionPageModule } from './connexion/connexion.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ConnexionPageModule
+    ConnexionPageModule,
     
   ],
   providers: [

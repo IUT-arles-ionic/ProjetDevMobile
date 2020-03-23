@@ -1,17 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+
+<ng-template [ngIf]="verifconnection">
+<div class="Menu">
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>ffffffffffffffffffffffffffffffffffffff</ion-title>
     </ion-toolbar>
   </ion-header>
-  
-</ion-content>
+
+    <ion-content [fullscreen]="true">
+      <ion-header collapse="condense">
+        <ion-toolbar>
+          <ion-title size="large">fffffffffffffffffffffffffffffffffffffffffffffffffff</ion-title>
+        
+            <ion-card *ngFor="let article of articles">
+              <img *ngIf="article.photos.length>0" src="http://www.sebastien-thon.fr/cours/M4104Cip/projet/images/{{article.photos[0].image}}" />
+              <ion-card-header>
+                <ion-card-subtitle>Destination</ion-card-subtitle>
+                <ion-card-title>Madison, WI</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+              </ion-card-content>
+            </ion-card>
+          
+        </ion-toolbar>
+      </ion-header>
+      
+  </ion-content>
+</div>
+ </ng-template>

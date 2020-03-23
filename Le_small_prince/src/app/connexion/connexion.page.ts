@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
-
+import { ModalController } from '@ionic/angular';
+import { NavParams } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-connexion',
@@ -12,35 +13,48 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class ConnexionPage implements OnInit {
-  public folder: string;
   public email: string;
   public password: string;
-  public array: string [];
-  public arraytemp : string;
-  public verifconnection: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient) { }
+  constructor(public toastController: ToastController,private activatedRoute: ActivatedRoute, private http: HttpClient, private modalCtrl: ModalController, private navParams: NavParams) { }
 
   ngOnInit() {
   }
 
+
+  dismiss() {
+    console.log(this.email)
+    console.log(this.password)
+    this.modalCtrl.dismiss({
+      'dismissed': true,
+      'email':this.email,
+      'password':this.password,
+    });
+  }
+
+  
   connexion()
   {
     fetch('http://www.sebastien-thon.fr/cours/M4104Cip/projet/index.php?connexion&login='+this.email+'&mdp='+this.password)
     .then(response => response.json())
     .then(data => { if(data.resultat=='OK')
       {
-
+          this.dismiss()
       }
       else
       {
-       alert('Ben juste nique ta maman')
+        this.presentToast()
       }
     }) 
     .catch(error => {
       return false
     })
-
-
   } 
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Identifiant de connection invalide',
+      duration: 2000
+    });
+    toast.present();
+  }
 }
