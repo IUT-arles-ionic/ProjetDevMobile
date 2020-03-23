@@ -55,12 +55,27 @@ export class FolderPage implements OnInit {
   {
     return this.verifconnection
   }
+  verifappartenance(value)
+  {
+    if(this.email=='classe'+value || value==0)
+    {
+      return true
+      
+    }
+    else
+    {
+    return false
+    }
+  }
+  async rafraichirListe(event){
+    this.getData()
+    event.target.complete();
+  }
   getData()
   {
     fetch('http://www.sebastien-thon.fr/cours/M4104Cip/projet/index.php?&login='+this.email+'&mdp='+this.password)
     .then(response => response.json())
     .then(data => {
-      console.log(data)
         this.articles=data.articles
         this.galeries=data.galeries
         this.dates=data.dates
