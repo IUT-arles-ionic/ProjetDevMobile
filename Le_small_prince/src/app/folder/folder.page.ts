@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ConnexionPage } from '../connexion/connexion.page';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -31,7 +32,7 @@ export class FolderPage implements OnInit {
     galeries: [],
   }
 
-  constructor(public modalController: ModalController, private router: Router) { }
+  constructor(public modalController: ModalController, private router: Router, private storage: Storage) { }
 
   
     async presentModal() {
