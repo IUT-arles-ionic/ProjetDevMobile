@@ -16,21 +16,25 @@ export class ArticlePage implements OnInit {
   password:''
   theSate: []
   favoris: []
+  articlefav:any;
+  tempoverif:false
+
 
   constructor(private route: ActivatedRoute, private router: Router,private storage: Storage) { 
     this.route.queryParams.subscribe(params => {
-      console.log('params',params);
 
         if(this.router.getCurrentNavigation().extras.state)
         {
           this.data=this.router.getCurrentNavigation().extras.state.user;
-          console.log(this.data)
         }
       
     })
   }
 
   ngOnInit() {
+     this.getData()
+    this.storage.get('email').then((val) => {this.email = val })
+    this.storage.get('password').then((val) => {this.password= val })
     this.email=this.data.email
     this.password=this.data.password
   }
@@ -40,36 +44,35 @@ export class ArticlePage implements OnInit {
     event.target.complete();
   }
 
-  verifappartenance(value)
-  {
-    if(this.email=='classe'+value || value==0)
-    {
-      return true
-    }
-    else
-    {
-      return false
-    }
-  }
-  stateChange(article)
-  {
-    this.storage.set('favoris', article)
-    console.log(this.theSate)
-  }
 
-  verifavoris(id)
+  async stateChange(id,event)
   {
-   /* var tempo=false
-      this.storage.get('favoris').then((val) => {this.favoris = val })
-      this.favoris.forEach(element => {
-        if(id=element)
-        {
-          tempo=true
-        }
-      });
-      return tempo*/
+    var tempo
+    await this.storage.get(id.titre).then((val) => {tempo = val })
+
+    if(event==true)
+    {
+      if(tempo===null || tempo===undefined)
+      {
+        this.storage.set(id.titre, id)
+      }
+      else{
+
+        await this.storage.remove(id.titre)
+      }
+    }
+    else{
+       if(tempo===null || tempo===undefined)
+    {
+
+       this.storage.remove(id.titre)
+    }
+    else{
+
+      this.storage.set(id.titre, id)
+    }
+    }
   }
-  
   
   getData()
   {
@@ -83,5 +86,8 @@ export class ArticlePage implements OnInit {
     })
   }
 
+  async retour(){
+    this.router.navigate(['folder']);
+  }
 
 }
