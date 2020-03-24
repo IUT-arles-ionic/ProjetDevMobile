@@ -21,6 +21,7 @@ export class FolderPage implements OnInit {
   public firstco: boolean;
   public articles: [];
   public galeries: [];
+  public articlefav:[];
   public dates: [];
   public arraytemp : string;
   private verifconnection: boolean;
@@ -142,6 +143,9 @@ export class FolderPage implements OnInit {
       }
     }
     this.router.navigate(['dates'], navigationExtras );
+  }
+  async opencontact(){
+    this.router.navigate(['contact']);
   }
 
   async deconnection(){

@@ -59,6 +59,9 @@ export class GaleriePage implements OnInit {
       console.log('Serveur non accessible')
     })
   }
+  async retour(){
+    this.router.navigate(['folder']);
+  }
 
 
 }

@@ -62,6 +62,9 @@ export class DatesPage implements OnInit {
       console.log('Serveur non accessible')
     })
   }
+  async retour(){
+    this.router.navigate(['folder']);
+  }
 
 
 }
