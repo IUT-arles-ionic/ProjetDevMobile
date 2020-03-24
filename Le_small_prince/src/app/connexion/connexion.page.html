@@ -16,18 +16,19 @@
 
   <div id="container">
     <ion-item >
-      <ion-label color="black">Email</ion-label>
-      <ion-input color="black" type="mail" [(ngModel)]="email" placeholder="Adresse email"></ion-input>
+      <ion-label color="black">Identifiant</ion-label>
+      <ion-input color="black" type="mail" [(ngModel)]="email" placeholder="Identifiant"></ion-input>
     </ion-item>
     
     <ion-item>
       <ion-label color="black">Mot de passe</ion-label>
       <ion-input color="black" [(ngModel)]="password" type="password" placeholder="Mot de passe"></ion-input>
-      
     </ion-item>
     <br>
-    <ion-checkbox checked="true" [(ngModel)]="checkbox"></ion-checkbox>
-    <ion-label>Rester connecté </ion-label>
+    <div class="my-checkbox ">
+      <ion-checkbox checked="true" [(ngModel)]="checkbox"></ion-checkbox>
+      <ion-label>Rester connecté </ion-label>
+    </div>
     <br>
     <ion-button (click) ="connexion()" color="tertiary" expand="block" shape="round">Connexion</ion-button>
   </div>

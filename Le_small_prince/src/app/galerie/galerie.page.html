@@ -5,22 +5,19 @@
   </ion-toolbar>
 
   <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="rafraichirListe($event)"><ion-refresher-content  refreshingSpinner="circles"></ion-refresher-content></ion-refresher>  
-  <ion-card *ngFor="let galerie of data.galeries">
-    <div *ngIf="verifappartenance(galerie.classe)">
-    <img *ngFor="let photo of galerie.photos" src="http://www.sebastien-thon.fr/cours/M4104Cip/projet/images/{{photo.image}}"/>
-    <ion-card-header>
-      <ion-card-subtitle>Destination</ion-card-subtitle>
-      <ion-card-title>{{galerie.titre}}</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <p>Date: {{galerie.date}}</p>
-    <p>Categorie: {{galerie.categorie}}</p>
-    <p>Niveau important: {{galerie.important}}</p>
-    <p>Classe: {{galerie.classe}}</p>
-    <p>Contenu: {{galerie.texte}}</p></ion-card-content>
-  </div>
-</ion-card>
+    <ion-refresher slot="fixed" (ionRefresh)="rafraichirListe($event)"><ion-refresher-content  refreshingSpinner="circles"></ion-refresher-content></ion-refresher>  
+    <ion-card *ngFor="let galerie of data.galeries">
+      <div *ngIf="verifappartenance(galerie.classe)">
+        <img *ngFor="let photo of galerie.photos" src="http://www.sebastien-thon.fr/cours/M4104Cip/projet/images/{{photo.image}}" class="img"/>
+        <ion-card-header>
+          <ion-card-title>{{galerie.titre}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+        <p>Date: {{galerie.date}}</p>
+        <p>Classe: {{galerie.classe}}</p>
+        <p>Contenu: {{galerie.texte}}</p></ion-card-content>
+      </div>
+    </ion-card>
 
 </ion-content>
 

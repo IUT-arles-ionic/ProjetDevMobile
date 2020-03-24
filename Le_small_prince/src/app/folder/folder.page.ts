@@ -72,7 +72,7 @@ export class FolderPage implements OnInit {
        this.router.navigate(['slide'])
     }
    
-    if(this.email=='' || this.email===null || this.email===undefined)
+    if(this.email=='' || this.email===null || this.email===undefined || this.verifconnection === null || this.verifconnection === false)
        {
           this.presentModal();
        }
@@ -84,13 +84,10 @@ export class FolderPage implements OnInit {
       return false
     }
     else
-    {  return true
+    {  
+      return true
     }
-   getVerif() {
-    console.log(this.storage.get('connection').then((val) => {return val}));
-    return 
   }
-
 
   async rafraichirListe(event) {
     this.getData()
@@ -147,6 +144,12 @@ export class FolderPage implements OnInit {
     this.router.navigate(['dates'], navigationExtras );
   }
 
+  async deconnection(){
+    await this.storage.set('connecter', false)
+    await this.storage.remove('email')
+    await this.storage.remove('password')
+    this.presentModal()
+  }
 
 
   async getData()
