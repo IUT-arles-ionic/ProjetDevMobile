@@ -19,7 +19,10 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicModule.forRoot(),
     AppRoutingModule,
     ConnexionPageModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot({
+      name: 'BDD',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
+    })
   ],
   providers: [
     StatusBar,

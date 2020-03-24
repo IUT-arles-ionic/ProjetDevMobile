@@ -15,6 +15,7 @@ import { ToastController } from '@ionic/angular';
 export class ConnexionPage implements OnInit {
   public email: string;
   public password: string;
+  public checkbox: boolean ;
 
   constructor(public toastController: ToastController,private activatedRoute: ActivatedRoute, private http: HttpClient, private modalCtrl: ModalController, private navParams: NavParams) { }
 
@@ -25,10 +26,12 @@ export class ConnexionPage implements OnInit {
   dismiss() {
     console.log(this.email)
     console.log(this.password)
+    console.log(this.checkbox);    
     this.modalCtrl.dismiss({
       'dismissed': true,
       'email':this.email,
       'password':this.password,
+      'checkbox': this.checkbox
     });
   }
 

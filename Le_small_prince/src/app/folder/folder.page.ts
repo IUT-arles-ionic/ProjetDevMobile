@@ -42,11 +42,13 @@ export class FolderPage implements OnInit {
     });
 
     modal.onDidDismiss().then((data) => {
+      console.log(data);
+      
      if(data['data'].dismissed==true)
      {
-      console.log(data)
-       this.password=data['data'].password
-       this.email=data['data'].email
+       this.storage.set('password', data['data'].password)
+       this.storage.set('email', data['data'].email)
+       this.storage.set('connecter', data['data'].checkbox)
        this.verifconnection=true
        this.getData()
      }
@@ -55,36 +57,39 @@ export class FolderPage implements OnInit {
   }
 
   ngOnInit() {
-    if(false)
-    {
-     this.router.navigate(['slide'])
-    }
-    else{
-      if(this.verifconnection==true)
-    {
-
-    }
-    else
-    {
-      this.presentModal()
-    }}
-    
+    this.storage.get('email').then((val) => this.email = val)
+    this.storage.get('password').then((val) => this.password = val)
+    this.storage.get('firstco').then( data =>{
+          if(data)
+          {
+            this.storage.get('connecter').then((val) => {if(val) {
+              if(val == true){                
+              }else {
+                this.presentModal();
+              }
+            }})
+          }
+          else
+          {
+            this.router.navigate(['slide'])
+          }
+      })          
   }
 
-   getVerif()
-  {
-    return this.verifconnection
+   getVerif() {
+    console.log(this.storage.get('connection').then((val) => {return val}));
+    return this.storage.get('connection').then((val) => {return val})
   }
 
 
-  async rafraichirListe(event){
+  async rafraichirListe(event) {
     this.getData()
     event.target.complete();
   }
 
   opengalerie(){
-    this.user.email=this.email;
-    this.user.password=this.password
+    this.storage.get('email').then((val) => this.user.email = val)
+    this.storage.get('password').then((val) => this.user.password = val)
     this.user.connection=this.verifconnection
     this.user.dates=this.dates
     this.user.galeries=this.galeries

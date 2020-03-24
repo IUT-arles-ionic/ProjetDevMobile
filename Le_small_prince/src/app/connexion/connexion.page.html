@@ -26,7 +26,8 @@
       
     </ion-item>
     <br>
-    <ion-checkbox checked="true">Restez connecté</ion-checkbox>
+    <ion-checkbox checked="true" [(ngModel)]="checkbox"></ion-checkbox>
+    <ion-label>Rester connecté </ion-label>
     <br>
     <ion-button (click) ="connexion()" color="tertiary" expand="block" shape="round">Connexion</ion-button>
   </div>
