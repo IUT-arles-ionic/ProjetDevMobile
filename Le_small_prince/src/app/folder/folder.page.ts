@@ -86,6 +86,9 @@ export class FolderPage implements OnInit {
     else
     {  return true
     }
+   getVerif() {
+    console.log(this.storage.get('connection').then((val) => {return val}));
+    return 
   }
 
 
