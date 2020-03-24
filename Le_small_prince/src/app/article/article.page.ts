@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute, NavigationExtras } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { ModalController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -15,9 +14,10 @@ export class ArticlePage implements OnInit {
   article:[]
   email:''
   password:''
+  theSate: []
+  favoris: []
 
-
-  constructor(private route: ActivatedRoute, private router: Router) { 
+  constructor(private route: ActivatedRoute, private router: Router,private storage: Storage) { 
     this.route.queryParams.subscribe(params => {
       console.log('params',params);
 
@@ -51,7 +51,26 @@ export class ArticlePage implements OnInit {
       return false
     }
   }
+  stateChange(article)
+  {
+    this.storage.set('favoris', article)
+    console.log(this.theSate)
+  }
 
+  verifavoris(id)
+  {
+   /* var tempo=false
+      this.storage.get('favoris').then((val) => {this.favoris = val })
+      this.favoris.forEach(element => {
+        if(id=element)
+        {
+          tempo=true
+        }
+      });
+      return tempo*/
+  }
+  
+  
   getData()
   {
     fetch('http://www.sebastien-thon.fr/cours/M4104Cip/projet/index.php?&login='+this.email+'&mdp='+this.password)

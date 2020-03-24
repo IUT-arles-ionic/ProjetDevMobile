@@ -19,6 +19,11 @@
       <p>Niveau important: {{article.important}}</p>
       <p>Classe: {{article.classe}}</p>
       <p>Contenu: {{article.texte}}</p></ion-card-content>
+      <div *ngIf="verifavoris(article.titre);else nonfav">  <ion-toggle [(ngModel)]="article.id" checked (ionChange)="theSate[article.titre]"></ion-toggle></div>
+      <ng-template #nonfav>
+        <ion-toggle [(ngModel)]="theSate[article.titre]" (ionChange)="theSate[article.titre]"></ion-toggle>
+      </ng-template>
+     
     </div>
   </ion-card>
   

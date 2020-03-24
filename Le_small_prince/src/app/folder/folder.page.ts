@@ -18,6 +18,7 @@ export class FolderPage implements OnInit {
   public folder: string;
   public email: string;
   public password: string;
+  public firstco: boolean;
   public articles: [];
   public galeries: [];
   public dates: [];
@@ -42,7 +43,6 @@ export class FolderPage implements OnInit {
     });
 
     modal.onDidDismiss().then((data) => {
-      console.log(data);
       
      if(data['data'].dismissed==true)
      {
@@ -56,29 +56,36 @@ export class FolderPage implements OnInit {
     return await modal.present();
   }
 
-  ngOnInit() {
-    this.storage.get('email').then((val) => this.email = val)
-    this.storage.get('password').then((val) => this.password = val)
-    this.storage.get('firstco').then( data =>{
-          if(data)
-          {
-            this.storage.get('connecter').then((val) => {if(val) {
-              if(val == true){                
-              }else {
-                this.presentModal();
-              }
-            }})
-          }
-          else
-          {
-            this.router.navigate(['slide'])
-          }
-      })          
+  ngOnChanges(){
+    
   }
 
-   getVerif() {
-    console.log(this.storage.get('connection').then((val) => {return val}));
-    return this.storage.get('connection').then((val) => {return val})
+  async ngOnInit() {
+    
+    await this.storage.get('email').then((val) => this.email = val)
+    await this.storage.get('password').then((val) => this.password = val)
+    await this.storage.get('firstco').then((val) => {this.firstco = val })
+    await this.storage.get('connecter').then((val) => this.verifconnection = val)
+    await this.getData()
+    if(this.firstco===null || this.firstco===undefined)
+    {
+       this.router.navigate(['slide'])
+    }
+   
+    if(this.email=='' || this.email===null || this.email===undefined)
+       {
+          this.presentModal();
+       }
+  }
+
+   async getVerif() {
+    if(this.email!==null || this.email!==undefined)
+    {
+      return false
+    }
+    else
+    {  return true
+    }
   }
 
 
@@ -87,9 +94,11 @@ export class FolderPage implements OnInit {
     event.target.complete();
   }
 
-  opengalerie(){
-    this.storage.get('email').then((val) => this.user.email = val)
-    this.storage.get('password').then((val) => this.user.password = val)
+ async opengalerie(){
+  
+    await this.storage.get('email').then((val) => this.user.email = val)
+    await this.storage.get('password').then((val) => this.user.password = val)
+    await this.getData()
     this.user.connection=this.verifconnection
     this.user.dates=this.dates
     this.user.galeries=this.galeries
@@ -101,7 +110,27 @@ export class FolderPage implements OnInit {
     this.router.navigate(['galerie'], navigationExtras );
   }
 
-  opendates(){
+  async openarticle(){
+    await this.storage.get('email').then((val) => this.user.email = val)
+    await this.storage.get('password').then((val) => this.user.password = val)
+    await this.getData()
+    this.user.email=this.email;
+    this.user.password=this.password
+    this.user.connection=this.verifconnection
+    this.user.articles=this.dates
+    let navigationExtras : NavigationExtras ={
+      state : {
+        user: this.user,
+      }
+    }
+    this.router.navigate(['article'], navigationExtras );
+  }
+
+
+ async opendates(){
+    await this.storage.get('email').then((val) => this.user.email = val)
+    await this.storage.get('password').then((val) => this.user.password = val)
+    await this.getData()
     this.user.email=this.email;
     this.user.password=this.password
     this.user.connection=this.verifconnection
@@ -117,9 +146,9 @@ export class FolderPage implements OnInit {
 
 
 
-  getData()
+  async getData()
   {
-    fetch('http://www.sebastien-thon.fr/cours/M4104Cip/projet/index.php?&login='+this.email+'&mdp='+this.password)
+    await fetch('http://www.sebastien-thon.fr/cours/M4104Cip/projet/index.php?&login='+this.user.email+'&mdp='+this.user.password)
     .then(response => response.json())
     .then(data => {
         this.articles=data.articles

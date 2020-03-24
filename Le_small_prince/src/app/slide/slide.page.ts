@@ -14,9 +14,8 @@ export class SlidePage implements OnInit {
   ngOnInit() {
     this.storage.set('firstco', true)
   }
+  
   redirection(){
-    
-
-    this.router.navigate(['folder']);
+    this.router.navigate(['']);
   }
 }

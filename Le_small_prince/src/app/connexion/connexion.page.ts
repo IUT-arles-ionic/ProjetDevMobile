@@ -24,9 +24,7 @@ export class ConnexionPage implements OnInit {
 
 
   dismiss() {
-    console.log(this.email)
-    console.log(this.password)
-    console.log(this.checkbox);    
+ 
     this.modalCtrl.dismiss({
       'dismissed': true,
       'email':this.email,
