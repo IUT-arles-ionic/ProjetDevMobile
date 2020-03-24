@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ConnexionPage } from '../connexion/connexion.page';
-import { Input } from '@angular/core';
 
 
 
@@ -24,8 +22,16 @@ export class FolderPage implements OnInit {
   public dates: [];
   public arraytemp : string;
   private verifconnection: boolean;
+  user ={
+    password:'',
+    email:'',
+    connection: false,
+    dates: [],
+    articles: [],
+    galeries: [],
+  }
 
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient,public modalController: ModalController) { }
+  constructor(public modalController: ModalController, private router: Router) { }
 
   
     async presentModal() {
@@ -47,30 +53,62 @@ export class FolderPage implements OnInit {
     return await modal.present();
   }
 
-  ngOnInit() { 
-    this.presentModal()
+  ngOnInit() {
+    if(false)
+    {
+     this.router.navigate(['slide'])
+    }
+    else{
+      if(this.verifconnection==true)
+    {
+
+    }
+    else
+    {
+      this.presentModal()
+    }}
+    
   }
 
    getVerif()
   {
     return this.verifconnection
   }
-  verifappartenance(value)
-  {
-    if(this.email=='classe'+value || value==0)
-    {
-      return true
-      
-    }
-    else
-    {
-    return false
-    }
-  }
+
+
   async rafraichirListe(event){
     this.getData()
     event.target.complete();
   }
+
+  opengalerie(){
+    this.user.email=this.email;
+    this.user.password=this.password
+    this.user.connection=this.verifconnection
+    this.user.dates=this.dates
+    this.user.galeries=this.galeries
+    let navigationExtras : NavigationExtras ={
+      state : {
+        user: this.user,
+      }
+    }
+    this.router.navigate(['galerie'], navigationExtras );
+  }
+
+  openarticle(){
+    this.user.email=this.email;
+    this.user.password=this.password
+    this.user.connection=this.verifconnection
+    this.user.dates=this.dates
+    this.user.articles=this.articles
+    let navigationExtras : NavigationExtras ={
+      state : {
+        user: this.user,
+      }
+    }
+    this.router.navigate(['article'], navigationExtras );
+  }
+
   getData()
   {
     fetch('http://www.sebastien-thon.fr/cours/M4104Cip/projet/index.php?&login='+this.email+'&mdp='+this.password)

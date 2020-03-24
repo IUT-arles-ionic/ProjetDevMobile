@@ -1,0 +1,33 @@
+<div class="galerie">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>article</ion-title>
+    </ion-toolbar>
+  
+    <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" (ionRefresh)="rafraichirListe($event)"><ion-refresher-content  refreshingSpinner="circles"></ion-refresher-content></ion-refresher>  
+    <ion-card *ngFor="let article of data.articles">
+      <div *ngIf="verifappartenance(article.classe)">
+      <img *ngFor="let photo of article.photos" src="http://www.sebastien-thon.fr/cours/M4104Cip/projet/images/{{photo.image}}"/>
+      <ion-card-header>
+        <ion-card-subtitle>Destination</ion-card-subtitle>
+        <ion-card-title>{{article.titre}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Date: {{article.date}}</p>
+      <p>Categorie: {{article.categorie}}</p>
+      <p>Niveau important: {{article.important}}</p>
+      <p>Classe: {{article.classe}}</p>
+      <p>Contenu: {{article.texte}}</p></ion-card-content>
+    </div>
+  </ion-card>
+  
+  </ion-content>
+  
+  
+  </ion-header>
+  </div>
+  
+  
+  
+  

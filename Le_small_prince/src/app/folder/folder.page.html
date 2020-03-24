@@ -9,30 +9,12 @@
         <ion-title>ffffffffffffffffffffffffffffffffffffff</ion-title>
       </ion-toolbar>
     </ion-header>
-
+    
       <ion-content [fullscreen]="true">
         <ion-header collapse="condense">
           <ion-toolbar>
-            <ion-title size="large">fffffffffffffffffffffffffffffffffffffffffffffffffff</ion-title>
-              <ion-refresher slot="fixed" (ionRefresh)="rafraichirListe($event)"><ion-refresher-content  refreshingSpinner="circles"></ion-refresher-content></ion-refresher>
-
-              <ion-card *ngFor="let article of articles">
-                <div *ngIf="verifappartenance(article.classe)">
-                  
-                <img *ngIf="article.photos.length>0" src="http://www.sebastien-thon.fr/cours/M4104Cip/projet/images/{{article.photos[0].image}}" />
-                <ion-card-header>
-                  <ion-card-subtitle>Destination</ion-card-subtitle>
-                  <ion-card-title>{{article.titre}}</ion-card-title>
-              </ion-card-header>
-              <ion-card-content>
-                <p>Date: {{article.date}}</p>
-                <p>Categorie: {{article.categorie}}</p>
-                <p>Niveau important: {{article.important}}</p>
-                <p>Classe: {{article.classe}}</p>
-                <p>Contenu: {{article.texte}}</p></ion-card-content>
-              </div>
-            </ion-card>
-          
+            <ion-button expand="full" (click)="opengalerie()">allez voir les galeries</ion-button>
+            <ion-button expand="full" (click)="openarticle()">allez voir les articles</ion-button>
           </ion-toolbar>
         </ion-header>
         
