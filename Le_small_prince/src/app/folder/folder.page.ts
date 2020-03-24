@@ -96,19 +96,21 @@ export class FolderPage implements OnInit {
     this.router.navigate(['galerie'], navigationExtras );
   }
 
-  openarticle(){
+  opendates(){
     this.user.email=this.email;
     this.user.password=this.password
     this.user.connection=this.verifconnection
     this.user.dates=this.dates
-    this.user.articles=this.articles
+    this.user.galeries=this.galeries
     let navigationExtras : NavigationExtras ={
       state : {
         user: this.user,
       }
     }
-    this.router.navigate(['article'], navigationExtras );
+    this.router.navigate(['dates'], navigationExtras );
   }
+
+
 
   getData()
   {
