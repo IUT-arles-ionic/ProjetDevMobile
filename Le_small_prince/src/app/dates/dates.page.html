@@ -1,0 +1,31 @@
+<div class="dates">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>article</ion-title>
+    </ion-toolbar>
+  
+    <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" (ionRefresh)="rafraichirListe($event)"><ion-refresher-content  refreshingSpinner="circles"></ion-refresher-content></ion-refresher>  
+    <ion-card *ngFor="let date of data.dates">
+      <div *ngIf="verifappartenance(date.classe)">
+      <ion-card-header>
+        <ion-card-subtitle>Destination</ion-card-subtitle>
+        <ion-card-title>{{date.titre}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Date: {{date.date}}</p>
+      <p>Titre: {{date.titre}}</p>
+      <p>Classe: {{date.classe}}</p>
+      <p>Contenu: {{date.texte}}</p></ion-card-content>
+    </div>
+  </ion-card>
+  
+  </ion-content>
+  
+  
+  </ion-header>
+  </div>
+  
+  
+  
+  
